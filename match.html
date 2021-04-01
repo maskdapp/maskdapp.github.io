@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="matchstyles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://kit.fontawesome.com/2f9c919c13.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="tbg" id="matchPage">
+  <div class="match">
+    <div class="mtext">It's a Match!</div>
+    <div class="m1"><img src="./Untitled.png" id="canIgrabthis"/></div>
+    <div class="m2"><img src="./davidimage.png" /></div>
+    <div class="sendmsg"><a href="NEEDSWORKmessages.html"><i class="fa fa-comment" aria-hidden="true"></i> Send a Message</a></div>
+    <div class="playing"><a href="index.html"><i class="fa fa-user" aria-hidden="true"></i> Keep Playing</a></div>
+    <div class="share"><i class="fa fa-share-square-o" aria-hidden="true"></i> Tell Your Friends</div>
+  </div>
+
+
+  <!-- <div class="credit"><a href="http://themakery.jcink.net">Created by Miami</a></div> -->
+</div>
+<div>
+  <button type="button" onclick="displayAsNone()">thing</button>
+  <button type="button" onclick="displayAsThing()">thing</button>
+  <button type="button" onclick="rickRoll()">thing</button>
+</div>
+<audio id="rickRoll">
+  <source src="./Nirvana vs Rick Astley - Never Gonna Give Your Teen Spirit up.mp3" type="audio/mpeg">
+</audio>
+</body>
+</script>
+
+<!--
+<script src="./index.js"></script>
+-->
+<script>
+function displayAsNone() {
+  document.getElementById("matchPage").style.display = 'none';
+}
+function displayAsThing() {
+  document.getElementById("matchPage").style.display = 'inline';
+}
+
+
+</script>
+</html>

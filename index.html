@@ -1,1 +1,1001 @@
-Knock knock, World!
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://kit.fontawesome.com/2f9c919c13.js" crossorigin="anonymous"></script>
+  <style>
+
+  :root {
+    --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --msger-bg: #fff;
+    --border: 2px solid #ddd;
+    --left-msg-bg: #ececec;
+    --right-msg-bg: #579ffb;
+  }
+
+  html {
+    box-sizing: border-box;
+  }
+
+
+
+  body {
+
+
+
+
+
+    font-family: Helvetica, sans-serif;
+  }
+
+  .msger {
+    /* this is important! */
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    height: 640px;
+    /*  height: calc(100% - 50px); */
+    justify-content: space-between;
+    margin: 25px 10px;
+    border-radius: 5px;
+  }
+
+
+
+  .msger-chat {
+    /* important!!!*/
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    height: 550px;
+  }
+
+
+
+  .msg {
+    /* important!*/
+    display: flex;
+    align-items: flex-end;
+    /* adding above */
+    margin-bottom: 10px;
+  }
+  .msg:last-of-type {
+    margin: 0;
+  }
+  .msg-img {
+    /* profile image sizes! */
+    width: 50px;
+    height: 50px;
+    /* space between profile and message */
+    margin-right: 10px;
+    background: #ddd;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+  }
+  .msg-bubble {
+    /* important */
+    max-width: 268px;
+    /* adding above */
+    padding: 15px;
+    border-radius: 15px;
+    /* background color of bot's' messages */
+    background: var(--left-msg-bg);
+  }
+  .msg-info {
+    /* time on the side */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .msg-info-name {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  .msg-info-time {
+    font-size: 0.85em;
+  }
+
+  .left-msg .msg-bubble {
+    border-bottom-left-radius: 0;
+  }
+
+  .right-msg {
+    flex-direction: row-reverse;
+  }
+  .right-msg .msg-bubble {
+    /* right side coloring */
+    background: var(--right-msg-bg);
+    color: #fff;
+    border-bottom-right-radius: 0;
+  }
+  .right-msg .msg-img {
+    margin: 0 0 0 10px;
+  }
+
+  .msger-inputarea {
+    display: flex;
+    padding: 10px;
+    border-top: var(--border);
+    background: #eee;
+  }
+  .msger-inputarea * {
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 1em;
+  }
+  .msger-input {
+    flex: 1;
+    background: #ddd;
+  }
+  .msger-send-btn {
+    margin-left: 10px;
+    background: rgb(0, 196, 65);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+
+  }
+  .msger-send-btn:hover {
+    background: rgb(0, 180, 50);
+  }
+
+  .msger-chat {
+    background-color: #fcfcfe;
+
+  }
+
+  .msger {
+    display: none;
+  }
+  /*      */
+  /*
+  .msger {
+    height: 642px;
+  }
+  */
+  /*
+  .tphoto {
+    display: none;
+  }
+  .tinfo {
+    display: none;
+  }
+  .tcontrols {
+    display: none;
+  }
+  */
+
+  /*
+  START OF MATCH STYLES
+  */
+  .match {
+      height: 640px;
+      width: 100%;
+      background-color: rgba(51,51,51,0.75);
+      position: relative;
+      z-index: 1;
+  }
+  .mtext {
+      color: #fff;
+      font-size: 30px;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      top: 50px;
+      font-family: 'Dynalight', cursive;
+  }
+  .m1, .m2 {
+      background-color: #fff;
+      width: 150px;
+      height: 150px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 50%;
+      -moz-border-radius: 50%;
+      -o-border-radius: 50%;
+      -ms-border-radius: 50%;
+      margin: 10px;
+      display: inline-block;
+      /* */
+      left: 25%;
+
+      top: 40px;
+
+  }
+  .m1 img, .m2 img {
+      width: 150px;
+      height: 150px;
+  }
+  .sendmsg, .playing {
+      margin: 0 auto;
+      color: #fff;
+      font-size: 14px;
+      position: relative;
+      border: 1px solid #fff;
+      width: 250px;
+      padding: 15px 20px 15px 50px;
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+      -o-border-radius: 5px;
+      -ms-border-radius: 5px;
+      top: 70px;
+      font-family: 'Helvetica', sans-serif;
+      font-weight: 200;
+      margin-bottom: 20px;
+  }
+  .sendmsg i, .playing i { font-size: 14px; padding-right: 8px; }
+  .playing i { padding-right: 12px; font-size: 14px; }
+  .share {
+      color: #fff;
+      position: relative;
+      font-family: 'Helvetica', sans-serif;
+      top: 150px;
+      font-size: 14px;
+      font-weight: 200;
+      margin: 0 auto;
+      text-align: center;
+  }
+  .share i { font-size: 14px; padding: 5px; }
+
+  .match {
+    display: none;
+  }
+  /*
+  END OF MATCH STYLES
+  */
+  .debug {
+    display: none;
+  }
+
+  </style>
+</head>
+<body>
+<div class="tbg">
+  <div class="theader">
+    <!-- <a href="NEEDSWORKsettings.html"><i class="fa fa-cog" aria-hidden="true"></i></a> -->
+    <i class="fas fa-lungs-virus" aria-hidden="true"></i>
+
+    <!-- <a href="match.html"><i class="fa fa-comments" aria-hidden="true"></i></a> -->
+    <!--
+    <a href="index.html">swipe</a>
+    <a href="match.html">match</a>
+  -->
+  <i class="fa fa-comments" aria-hidden="true"></i>
+    <div class="tlogo">
+      <!-- <img src="https://worldvectorlogo.com/logos/tinder-1.svg" alt="Tinder Logo" title="Tinder Logo" /> -->
+      <img src="./LOGO-SEND.jpg" alt="Tinder Logo" title="Tinder Logo" />
+      <!-- <h1>MASKD</h1> -->
+    </div>
+  </div>
+  <div class="tbgwrap">
+    <!-- START OF MATCHWITHRICK -->
+    <div class="match">
+      <div class="mtext">It's a Match!</div>
+      <!-- <div class="m1"><img src="./Untitled.png" id="canIgrabthis"/></div> -->
+      <div class="m2"><img src="./Untitled4.png" /></div>
+      <div class="sendmsg" onclick="messagingRick()" touchstart="messagingRick()"><i class="fa fa-comment" ><p>Message Dave</p></i></div>
+      <!-- < <div class="playing"><i class="fa fa-user" aria-hidden="true"></i><p>Not Done Yet</p></div> -->
+      <!-- <div class="share"><i class="fa fa-share-square-o" aria-hidden="true"></i><p>Tell Your Friends</p></div> -->
+    </div>
+    <!-- END OF MATCHINGWITHRICK -->
+    <!-- START OF MESSAGES -->
+    <section class="msger" id="abso">
+      <!--
+      <header class="msger-header">
+        <div class="msger-header-title">
+          <i class="fas fa-comment-alt"></i> SimpleChat
+        </div>
+        <div class="msger-header-options">
+          <span><i class="fas fa-cog"></i></span>
+        </div>
+      </header>
+    -->
+      <main class="msger-chat">
+        <div class="msg left-msg">
+          <!-- left profile pic -->
+          <div class="msg-img" style="background-image: url('./Untitled4.png')"
+          ></div>
+
+          <div class="msg-bubble">
+            <div class="msg-info">
+              <div class="msg-info-name">Dave</div>
+            </div>
+
+            <div class="msg-text">
+              Hey
+            </div>
+          </div>
+        </div>
+
+
+      </main>
+
+      <form class="msger-inputarea">
+        <input type="text" class="msger-input" placeholder="Enter your message...">
+        <button type="submit" class="msger-send-btn">Send</button>
+      </form>
+    </section>
+    <audio id="rickRoll">
+      <source src="./Nirvana vs Rick Astley - Never Gonna Give Your Teen Spirit up.mp3" type="audio/mpeg">
+    </audio>
+    <!-- END OF MESSAGES -->
+    <div class="tphoto">
+      <!-- test adding heartbeat BELOW -->
+      <div class="superSpreaderBackground">
+        <div class="load">
+          <!-- <i class="fa fa-heartbeat fa-3x"></i> -->
+          <i class="fas fa-lungs-virus"></i>
+        </div>
+        <div>
+          <p id="superSpreaderText">There are no potential hosts around you.</p>
+        </div>
+      </div>
+      <!-- test adding heartbeat ABOVE -->
+      <!-- test of nope, superspread, yes -->
+      <div class="stamp is-approved" id="is-nope">MASK</div>
+      <div class="is-superspread" id="is-superspread">SUPER <br> SPREAD</div>
+      <div class="stamp is-nope" id="is-approved">MEET</div>
+      <!--                               -->
+      <img id="profileImage" src="./generated-photos-new/front/image (0).png" title="tphoto" alt="Tinder Photo" />
+      <!-- <img id="profileImage" src="./Untitled4.png" title="tphoto" alt="Tinder Photo" /> -->
+      <!-- <img id="maskImage" src="./mask.png" />
+      <img id="maskImage" src="./Masks/front-mask-rem-straps.png" />
+      -->
+      <img id="maskImage" src="./Masks/mask2.png" />
+      <div id="tempMaskGoesHere" id="maskImage"></div>
+      <!-- <div id=backgroundColor></div> -->
+      <!-- <div class="tname" id="profileName">Jane Doe, <span class="age" id="profileAge">27</span></div> -->
+      <div>
+        <div class="tname" id="profileName">Jane, 27</div>
+      </div>
+      <!--
+      <div class="tinfo"><i class="fa fa-book" aria-hidden="true"> 0</i><i class="fa fa-users" aria-hidden="true"> 0</i></div>
+      <i class="fas fa-plane"></i>
+      <i class="fas fa-people-arrows"></i>
+      -->
+
+      <div class="tinfo">
+        <i class="fas fa-plane" aria-hidden="true" id="planeTrips">2</i>
+        <i class="fas fa-people-arrows" aria-hidden="true" id="closePersonalContact">34</i>
+      </div>
+    </div>
+    <div class="tcontrols">
+
+    <!--	NO SECTION
+      <div class="tno"><i class="fa fa-times" aria-hidden="true"></i></div>
+      -->
+      <div class="tno"><i class="fas fa-head-side-mask fa-flip-horizontal" aria-hidden="true" id="cover"></i></div>
+      <!-- SUPER LIKE SECTION
+      <div class="ti"><i class="fa fa-info" aria-hidden="true"></i></div>
+      <div class="ti"><i class="fas fa-biohazard" aria-hidden="true"></i></div>
+      <i class="fas fa-lungs-virus"></i>
+      -->
+      <!-- <div class="ti"><i class="fas fa-lungs-virus" aria-hidden="true" id="spread"></i></div> -->
+      <div class="ti"><i class="fa fa-users" aria-hidden="true" id="spread"></i></div>
+      <!-- YES SECTION
+      <div class="tyes"><i class="fa fa-heart" aria-hidden="true"></i></div>
+      -->
+      <!-- <div class="tyes"><i class="fas fa-head-side-cough" aria-hidden="true" id="cough"></i></div> -->
+      <div class="tyes"><i class="fas fa-lungs-virus" aria-hidden="true" id="cough"></i></div>
+    </div>
+  </div>
+</div>
+
+<div class="debug">
+	<p id="lastButtonOutput"></p>
+</div>
+
+</body>
+<script>
+// SCRIPT FOR CHAT START
+function sleep (time) {
+return new Promise((resolve) => setTimeout(resolve, time));
+}
+var rickRollAudio = document.getElementById("rickRoll");
+function rickRoll() {
+  // location.replace("https://youtu.be/NN75im_us4k")
+  rickRollAudio.play();
+
+  sleep(27250).then(() => {
+  // Do something after the sleep!
+  // endGameTimer();
+  // document.getElementById("rickAstley").style.display = 'inline';
+  /*
+  class msger make invisible, classes (tphoto, tinfo, tcontrols make visible)
+  id profileImage make rick
+  rickastleymulti.gif
+  */
+  /*
+  document.getElementById("maskImage").style.display = 'none';
+  document.getElementsByClassName("tphoto")[0].style.display = 'none';
+  document.getElementsByClassName("tinfo")[0].style.display = 'none';
+  document.getElementsByClassName("tcontrols")[0].style.display = 'none';
+  */
+  // document.getElementById("myDIV").removeEventListener("mousemove", myFunction);
+  // document.getElementsByClassName("tcontrols")[0].style.display = 'none';
+
+  document.getElementsByClassName("msger")[0].style.display = 'none';
+  document.getElementsByClassName("tphoto")[0].style.display = 'inline-block';
+  document.getElementsByClassName("tinfo")[0].style.display = 'inline-block';
+  document.getElementsByClassName("tcontrols")[0].style.display = 'inline-block';
+  // document.getElementById("myDIV").removeEventListener("mousemove", myFunction);
+
+  document.getElementById("profileImage").src="rickastleymulti.gif";
+  document.getElementById("profileImage").style.height = '350px';
+  document.getElementById("profileImage").style.width = 'auto';
+  document.getElementById("maskImage").style.display = 'none';
+  document.getElementById("planeTrips").style.display = 'none';
+  document.getElementById("closePersonalContact").style.display = 'none';
+  document.getElementById("profileName").innerHTML = "Rick Astley, 55";
+  console.log('rick astley switch');
+  sleep(200750).then(() => {
+      window.location.href = "https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/prevention.html";
+    })
+})
+}
+const msgerForm = get(".msger-inputarea");
+const msgerInput = get(".msger-input");
+const msgerChat = get(".msger-chat");
+
+const BOT_MSGS = [
+  "Thanks for swiping my mask up!",
+  "Yes, Maskd is my April Fools joke. But, COVID-19 is not a joke.",
+  "Please take COVID-19 seriously. Wear a mask and get the vaccine when it becomes available.",
+  "Keep in mind that 'early data show that the vaccines may help keep people from spreading COVID-19, but we are learning more as more people get vaccinated.' https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html",
+  "Please take steps to protect yourself and others. At least read this if you haven't yet: https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/prevention.html",
+  "Okay, we've covered the important items. It's now time for a good old-fashioned April Fools prank :D. You're about to hear something and I don't want to startle you. Please place your phone on a flat surface before continuing. I don't want to risk having you drop your phone. Let me know when you're ready.",
+  "Alrighty, I'm starting the audio now :P"
+  /*
+ALOhA!
+means hello and goodbye in hawaii
+but, uh Aloha means has nothin to do with this app
+I'm so fuckin drunk
+okay, here's the deal i I'm gonna rest my eyes for a bit
+I'm not goin to sleep. i just just need to rest my eyes so
+let's make this one simple just
+try to hit some 3 pointers
+
+let's say you have to hit 5 3 pointers in 5 minutes or i dunno the whole place
+the whole planet will get blown up with a neutrino bomb
+
+and try to make it a lesson about yourselves like like how selfish you are or something
+and also hawaii
+  */
+];
+
+// Icons made by Freepik from www.flaticon.com
+const BOT_IMG = "./Untitled4.png";
+const PERSON_IMG = "";
+const BOT_NAME = "Dave";
+const PERSON_NAME = "";
+
+msgerForm.addEventListener("submit", event => {
+  event.preventDefault();
+
+  const msgText = msgerInput.value;
+  if (!msgText) return;
+
+  appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+  msgerInput.value = "";
+
+  botResponse();
+});
+
+function appendMessage(name, img, side, text) {
+  //   Simple solution for small apps
+  const msgHTML = `
+    <div class="msg ${side}-msg">
+      <div class="msg-img" style="background-image: url(${img})"></div>
+
+      <div class="msg-bubble">
+        <div class="msg-info">
+          <div class="msg-info-name">${name}</div>
+          <div class="msg-info-time">${formatDate(new Date())}</div>
+        </div>
+
+        <div class="msg-text">${text}</div>
+      </div>
+    </div>
+  `;
+
+  msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+  msgerChat.scrollTop += 500;
+}
+
+var rickResponseNum = 0;
+function botResponse() {
+  // const r = random(0, BOT_MSGS.length - 1);
+
+  const msgText = BOT_MSGS[rickResponseNum];
+  const delay = msgText.split(" ").length * 100;
+
+  setTimeout(() => {
+    appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+  }, delay);
+  if (rickResponseNum == 6) {
+    console.log('running rick roll');
+    rickRoll();
+  }
+  rickResponseNum = rickResponseNum + 1;
+  if (rickResponseNum == 7) {
+    rickResponseNum = 0;
+  }
+}
+
+
+/*
+function botResponse() {
+  const r = random(0, BOT_MSGS.length - 1);
+  const msgText = BOT_MSGS[r];
+  const delay = msgText.split(" ").length * 100;
+
+  setTimeout(() => {
+    appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+  }, delay);
+}
+*/
+// Utils
+function get(selector, root = document) {
+  return root.querySelector(selector);
+}
+
+function formatDate(date) {
+  const h = "0" + date.getHours();
+  const m = "0" + date.getMinutes();
+
+  return `${h.slice(-2)}:${m.slice(-2)}`;
+}
+
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+// SCRIPT FOR CHAT END
+// swipeUp();
+// showNextProfile();
+function swipeUp() {
+  // SHOW MASK COVERING NOSE
+  // <img id="profileImage" src="./generated-photos-new/front/image (0).png" title="tphoto" alt="Tinder Photo" />
+  //
+  var tempMaskImage = new Image();
+  /* document.getElementById("is-nope").style.opacity = 1; */
+  document.getElementById("is-nope").style.display = 'inline-block';
+  tempMaskImage.src= "./Masks/mask2.png";
+  tempMaskImage.id = "tempMaskImage";
+  document.getElementById('tempMaskGoesHere').appendChild(tempMaskImage);
+  document.getElementById("tempMaskImage").style.top = '180px';
+  document.getElementById("tempMaskImage").style.left = '80px';
+  document.getElementById("tempMaskImage").style.width = '187px';
+  document.getElementById("tempMaskImage").style.position = 'absolute';
+  document.getElementById("tempMaskImage").style.zIndex = 10;
+  // setTimeout(() => tempMaskImage.parentNode.removeChild(tempMaskImage) = null, 1000);
+  setTimeout(function() { tempMaskImage.parentNode.removeChild(tempMaskImage) }, 1000);
+
+  // setTimeout( function(){ tempMaskImage.parentNode.removeChild(tempMaskImage) }, 10000);
+ setTimeout( function(){ document.getElementById("is-nope").style.display = 'none'; }, 1000);
+  // trigger swipe up graphic
+  // BUILD
+  // console.log('swipeup');
+  // top: 180px;  front-mask.png setting to cover nose
+  // left: 80px;
+  // width: 187px;
+  // setTimeout( showNextProfile(), 1000);
+  setTimeout(function() { showNextProfile() }, 1000);
+  // showNextProfile();
+};
+function swipeDown() {
+  // trigger sweipe down graphic
+  // BUILD
+  // console.log('swipedown');
+
+  // MAKE MASK INVISIBLE
+  // showNextProfile();
+  document.getElementById("is-approved").style.display = 'inline-block';
+  setTimeout( function(){ document.getElementById("is-approved").style.display = 'none'; }, 1000);
+  setTimeout(function() { showNextProfile() }, 1000);
+};
+
+var superSpreadCounter = 0;
+function superSpread() {
+  //
+  //#superSpreaderText
+  //.superSpreaderBackground
+  //.load
+
+  console.log("superSpread() called with superSPreadCounter: " + superSpreadCounter);
+  if (superSpreadCounter < 2) {
+  document.getElementById("is-superspread").style.display = 'inline-block';
+  document.getElementById("maskImage").style.display = 'none';
+
+  setTimeout(function() { document.getElementById("superSpreaderText").style.display = 'inline-block'}, 3000);
+  setTimeout(function() { document.getElementById("profileImage").style.opacity = 0 }, 3000);
+
+  setTimeout(function() { document.getElementById("is-superspread").style.display = 'none' }, 3000);
+
+  setTimeout(function() { document.getElementsByClassName("superSpreaderBackground")[0].style.display = 'inline-block' }, 3000);
+  setTimeout(function() { document.getElementsByClassName("load")[0].style.display = 'inline-block' }, 3000);
+  // make name, age, personal contacts and travel display none for 3 seconds
+  // planeTrips, closePersonalContact, profileName
+  setTimeout(function() { document.getElementById("planeTrips").style.display = 'none' }, 3000);
+  setTimeout(function() { document.getElementById("closePersonalContact").style.display = 'none' }, 3000);
+  setTimeout(function() { document.getElementById("profileName").style.display = 'none' }, 3000);
+  // bring  (name, age, personal contacts and travel) back at 10 seconds
+  setTimeout(function() { document.getElementById("planeTrips").style.display = 'inline-block' }, 10000);
+  setTimeout(function() { document.getElementById("closePersonalContact").style.display = 'inline-block' }, 10000);
+  setTimeout(function() { document.getElementById("profileName").style.display = 'inline-block' }, 10000);
+
+  setTimeout(function() { document.getElementById("superSpreaderText").style.display = 'none' }, 10000);
+  setTimeout(function() { document.getElementsByClassName("superSpreaderBackground")[0].style.display = 'none' }, 10000);
+  setTimeout(function() { document.getElementsByClassName("load")[0].style.display = 'none' }, 10000);
+
+  setTimeout(function() { document.getElementById("profileImage").style.opacity = 1; }, 10000);
+  setTimeout(function() { document.getElementById("maskImage").style.display = 'inline-block'; }, 10000);
+  setTimeout(function() { showNextProfile() }, 10000);
+//  superSpreadCounter = superSpreadCounter + 1;
+  }
+  else {
+    setTimeout(function() { meetingRick(); }, 10000);
+
+  }
+}
+
+
+// var meetingRickCounter = 0;
+function meetingRick() {
+  //if (meetingRickCounter == 0) {
+  //console.log("MEETING RICK!");
+  // setTimeout(function() { THINGGOESHERE = 'inline-block'}, 3000);
+  document.getElementById("profileImage").src="./Untitled4.png";
+  // document.getElementById("profileImage").style.height = "370px";
+  // document.getElementById("profileImage").style.width = "auto";
+  // document.getElementById("profileName").innerHTML = "Rick Sanchez, 70";
+  //meetingRickCounter = meetingRickCounter + 1;
+  //} else {
+    document.getElementById("maskImage").style.display = 'none';
+    document.getElementsByClassName("tphoto")[0].style.display = 'none';
+    document.getElementsByClassName("tinfo")[0].style.display = 'none';
+    document.getElementsByClassName("tcontrols")[0].style.display = 'none';
+    document.getElementsByClassName("match")[0].style.display = 'inline-block';
+
+  //}
+}
+
+function messagingRick() {
+  document.getElementById("planeTrips").innerHTML = '1';
+  document.getElementById("closePersonalContact").innerHTML = '9';
+  document.getElementById("maskImage").style.display = 'none';
+  document.getElementsByClassName("tphoto")[0].style.display = 'none';
+  document.getElementsByClassName("tinfo")[0].style.display = 'none';
+  document.getElementsByClassName("tcontrols")[0].style.display = 'none';
+  document.getElementsByClassName("match")[0].style.display = 'none';
+  document.getElementsByClassName("msger")[0].style.display = 'inline-block';
+}
+var showNextProfileCounter = 1;
+function showNextProfile() {
+  document.getElementById("maskImage").style.display = 'inline';
+  if (showNextProfileCounter %10 === 0) {
+    console.log("divisible by 10");
+    document.getElementById("profileName").innerHTML = "Dave";
+    currentProfilePic.src = "./Untitled4.png";
+    document.getElementById("closePersonalContact").innerHTML = 12;
+    document.getElementById("planeTrips").innerHTML = 1;
+  } else {
+  chooseLRFProfilePic();
+  setBackgroundColor();
+  setNumFlightsTraveled();
+  numClosePersonalContact();
+  // getName();
+  // getAge();
+  getNameAndAge();
+  // name
+  // age
+  }
+  showNextProfileCounter = showNextProfileCounter + 1;
+}
+
+var namePlusAge = "textstringhere";
+function getNameAndAge() {
+  getName();
+  getAge();
+  namePlusAge = currentName + ", " + randomAge.toString();
+  document.getElementById("profileName").innerHTML = namePlusAge;
+}
+
+
+// get name
+var currentNameArrayPos = 0;
+var currentName = "textaasastasdf";
+function getName() {
+  var nameArray = ["Elliot", "Quinn", "Taylor", "Angel", "Hayden", "Parker", "Adrian",
+  "Dakota", "Cameron", "Devon", "Evan", "Jesse", "Jody", "Kelsey", "Kendall",
+  "Morgan", "Robin", "Rory", "Shiloh", ]
+  currentName = nameArray[currentNameArrayPos];
+  currentNameArrayPos = currentNameArrayPos + 1;
+  if (currentNameArrayPos == 18) {
+    currentNameArrayPos = 0;
+  }
+
+  // return currentName;
+  // document.getElementById("profileName").innerHTML = currentName;
+
+}
+// get age
+var randomAge = 0;
+function getAge() {
+  randomAge = 18 + Math.floor(Math.random() * 18);
+  // return randomAge;
+  // console.log("random age is: " + randomAge);
+  randomAge = randomAge.toString();
+  // document.getElementById("profileAge").innerHTML = randomAge;
+}
+
+// get flights
+var numFlightsTraveled = null;
+function setNumFlightsTraveled(){
+  numFlightsTraveled = Math.floor(Math.random() * 9);
+  document.getElementById("planeTrips").innerHTML = numFlightsTraveled;
+  return numFlightsTraveled;
+}
+// get num personal contacts
+var numClosePersonal = null;
+function numClosePersonalContact(){
+  numClosePersonal = 10 + numFlightsTraveled * 4 + Math.floor(Math.random() * 63);
+  document.getElementById("closePersonalContact").innerHTML = numClosePersonal;
+
+}
+// get age
+
+// get name
+
+// get name and age line
+
+
+
+// var randomColNum = 666;
+var randomColNum = 0;
+// var randomColorChoice = null;
+var targetImage = document.getElementById("profileImage").getElementsByClassName("tphoto");
+function setBackgroundColor() {
+  // randomColNum = Math.floor(Math.random() * 11);
+  var arrayOfColors = ["#C2C2C2", "#F6F6F6", "#FAD6D6", "#FBDEED", "#E3D6FD", "#D5EDFE",
+  "#DAF8F9", "#E1F6D7", "#F2F8DA", "#FEF7D7", "#FBE4D4"];
+  var randomColorChoice = arrayOfColors[randomColNum];
+  randomColNum = randomColNum + 1;
+  if (randomColNum == 10) {
+    randomColNum = 0;
+  }
+  // console.log("random number generates color: " + randomColorChoice);
+  // console.log("I use # 3" + arrayOfColors[3]);
+  // console.log("which should be the same as: " + arrayOfColors[3] + "but y: " + randomColorChoice);
+  document.getElementById("profileImage").style.backgroundColor = randomColorChoice;
+  // console.log(targetImage);
+  // targetImage.style.backgroundColor = randomColorChoice;
+  // console.log("random color num: " + randomColNum);
+  // console.log("random color: " + randomColorChoice);
+  // document.getElementById("profileImage").setAttribute('style', "'background-color:" + randomColorChoice + " !important'");
+}
+
+var randomNum = null;
+function chooseLRFProfilePic() {
+  // testing w/ front only
+  // randomNum = Math.floor(Math.random() * 3);
+  randomNum = 0;
+  // console.log("random number is " + randomNum);
+  if (randomNum == 0) {
+    // console.log("calling FRONT profile pic FUNCTION");
+    showNextFrontProfile();
+  }    else if (randomNum == 1) {
+    // console.log("calling LEFT profile pic FUNCTION");
+    showNextLeftProfile();
+  }  else if (randomNum == 2) {
+    // console.log("calling RIGHT profile pic FUNCTION");
+    showNextRightProfile();
+  }   else {
+    // console.log("WHAT THE F&#@ IS GOING ON?!?")
+  }
+}
+
+// Array of Front Pictures
+/* css settings for front-mask.png
+top: 220px;
+// top: 180px;  front-mask.png setting to cover nose
+left: 80px;
+width: 187px;
+*/
+var currentFrontArrayPos = 1;
+var currentProfilePic = document.getElementById("profileImage");
+var frontPicArray = ["image (0).png", "image (1).png", "image (2).png",
+"image (3).png", "image (4).png", "image (5).png", "image (6).png",
+"image (7).png", "image (8).png", "image (9).png"];
+var arrayFrontLength = 10;
+var pathFront = "./generated-photos-new/front/";
+var currentFrontArrayPic = "image (9).png";
+function showNextFrontProfile() {
+  console.log("FRONT profile function RUNNING");
+  pathFront = "./generated-photos-new/front/"
+  currentFrontArrayPic = frontPicArray[currentFrontArrayPos];
+  // set mask css here
+  document.getElementById("maskImage").style.top = '220px';
+  document.getElementById("maskImage").style.left = '80px';
+  document.getElementById("maskImage").style.width = '187px';
+  currentProfilePic.src = pathFront + currentFrontArrayPic;
+  currentFrontArrayPos = currentFrontArrayPos + 1;
+  // console.log(currentFrontArrayPos);
+  var picsFrontRemaining = arrayFrontLength - currentFrontArrayPos;
+  // console.log(picsFrontRemaining);
+  if (picsFrontRemaining == 0) {
+    console.log("there are no pictures remaining for FRONT array");
+    console.log("restarting FRONT array position!");
+    currentFrontArrayPos = 0;
+  }
+}
+
+// Array of Left-Facing Pictures
+var currentLeftArrayPos = 0;
+var currentProfilePic = document.getElementById("profileImage");
+var leftPicArray = ["cG5n.png", "cG5n (1).png", "MDcyMDAucG5n.png",
+"NDgzMTQucG5n.png", "NjQ4MjcucG5n.png", "NjQ5NzAucG5n.png", "NjU2NzYucG5n.png",
+"NjY1MjYucG5n.png", "NzMxNDIucG5n.png", "OTc5NTAucG5n.png"];
+var arrayLeftLength = 10;
+function showNextLeftProfile() {
+  console.log("LEFT profile function RUNNING");
+  pathLeft = "./generated-photos-new/left/"
+  currentLeftArrayPic = leftPicArray[currentLeftArrayPos];
+  currentProfilePic.src = pathLeft + currentLeftArrayPic;
+  currentLeftArrayPos = currentLeftArrayPos + 1;
+  console.log(currentLeftArrayPos);
+  var picsLeftRemaining = arrayLeftLength - currentLeftArrayPos;
+  console.log(picsLeftRemaining);
+  if (picsLeftRemaining == 0) {
+    console.log("there are no pictures remaining for LEFT array!");
+    console.log("restarting LEFT position!");
+    currentLeftArrayPos = 0;
+  }
+}
+
+
+// Array of Right-Facing Pictures
+var currentArrayRightPos = 0;
+var currentProfilePic = document.getElementById("profileImage");
+var rightPicArray = ["580b57fcd9996e24bc43c2f7.png", "cG5n.png", "MjA1ODgucG5n.png",
+"MjMxODMucG5n.png", "NjQ4NjAucG5n.png", "NzYxMzEucG5n.png", "ODA1OTYucG5n.png",
+"ODk4ODEucG5n.png", "OTAyMDMucG5n.png", "OTE3NzQucG5n.png"];
+var arrayRightLength = 10;
+function showNextRightProfile() {
+  console.log("RIGHT profile function RUNNING");
+  pathRight = "./generated-photos-new/right/"
+  currentRightArrayPic = rightPicArray[currentArrayRightPos];
+  currentProfilePic.src = pathRight + currentRightArrayPic;
+  currentArrayRightPos = currentArrayRightPos + 1;
+  console.log(currentArrayRightPos);
+  var picsRightRemaining = arrayRightLength - currentArrayRightPos;
+  console.log(picsRightRemaining);
+  if (picsRightRemaining == 0) {
+    console.log("there are no pictures remaining from RIGHT array!");
+    console.log("restarting RIGHT position!");
+    currentArrayRightPos = 0;
+  }
+}
+
+
+
+/*
+window.addEventListener("touchmove", preventThatDefault);
+window.addEventListener("mousedown", prefentThatDefault);
+function preventThatDefault(event) {
+  event.preventDefault();
+}
+*/
+// document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
+
+var thatMask = document.getElementById('maskImage');
+var thatProfile = document.getElementById('profileImage');
+thatMask.addEventListener("mousedown", function(event){
+  event.preventDefault();
+})
+thatMask.addEventListener("touchstart", function(event){
+  event.preventDefault();
+})
+thatProfile.addEventListener("mousedown", function(event){
+  event.preventDefault();
+})
+thatProfile.addEventListener("touchstart", function(event){
+  event.preventDefault();
+})
+
+/*
+thatMask.ondragstart = function() {
+  return false;
+};
+*/
+
+
+// click
+var coverButtonVar = document.getElementById("cover");
+var spreadButtonVar = document.getElementById("spread");
+var coughButtonVar = document.getElementById("cough");
+coverButtonVar.addEventListener("click", function(){
+  document.getElementById("lastButtonOutput").innerHTML = "COVER";
+  document.getElementById("maskImage").style.display = 'none';
+  if (document.getElementById("profileName").innerHTML == "Dave") {
+    console.log("that works!");
+    meetingRick();
+  } else {
+    swipeUp();
+  }
+//  if (superSpreadCounter < 2) {
+
+//} else if (superSpreadCounter == 2) {
+//  meetingRick();
+//}
+//  else {
+
+//  console.log("stop clicking");
+});
+//});
+spreadButtonVar.addEventListener("click", function(){
+  document.getElementById("lastButtonOutput").innerHTML = "SPREAD";
+  // SUPER SPREADER!!!
+  // showNextProfile();
+  // showNextProfile();
+  // if (superSpreadCounter < 2) {
+  superSpread();
+//} else if (superSpreadCounter == 2) {
+///  console.log("you're not allowed to choose this");
+//} else {
+  //console.log("stop clicking");
+//}
+});
+coughButtonVar.addEventListener("click", function(){
+  document.getElementById("lastButtonOutput").innerHTML = "COUGH";
+  document.getElementById("maskImage").style.display = 'none';
+//  if (superSpreadCounter < 2) {
+  swipeDown();
+//} else if (superSpreadCounter == 2) {
+//  console.log("you're not allowed to choose this");
+//} else {
+//  console.log("stop clicking");
+//}
+});
+// touch
+/* a touch counts as a click event! I jusut realized that
+// these aren't required and were actually making the buttons count twice on mobile, lol
+coverButtonVar.addEventListener("touchstart", function(){
+  document.getElementById("lastButtonOutput").innerHTML = "COVER";
+  document.getElementById("maskImage").style.display = 'none';
+  if (superSpreadCounter < 2) {
+  swipeUp();
+} else {
+  meetingRick();
+}
+});
+spreadButtonVar.addEventListener("touchstart", function(){
+  document.getElementById("lastButtonOutput").innerHTML = "SPREAD";
+  // SUPER SPREADER!!!
+  // showNextProfile();
+  if (superSpreadCounter < 2) {
+  superSpread();
+} else {
+  meetingRick();
+}
+});
+coughButtonVar.addEventListener("touchstart", function(){
+  document.getElementById("lastButtonOutput").innerHTML = "COUGH";
+  document.getElementById("maskImage").style.display = 'none';
+  if (superSpreadCounter < 2) {
+  swipeDown();
+} else {
+  meetingRick();
+}
+});
+*/
+</script>
+<script type="module" src="index.js"></script>
+<!--
+<script src="./index.js"></script>
+-->
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://kit.fontawesome.com/2f9c919c13.js" crossorigin="anonymous"></script>
+  <style>
+  .tphoto {
+    overflow: hidden;
+  }
+  .tphoto #profileImageSettings {
+    /*
+    background-color: #C2C2C2;
+    opacity: 1;
+    z-index: 5;
+    /* position: absolute; */
+    /* hide this w/ opacity: 0
+    display: block;
+    background-position: bottom;
+    position: relative;
+    */
+
+
+
+    object-fit: cover;
+    width: 350px;
+    height: auto;
+    /*
+    display: inline-block;
+    */
+
+
+  }
+
+   #ball {
+    left: 80px;
+    width: 187px;
+    top: 220px;
+    left: 80px;
+    display: inline;
+    height: auto;
+    overflow: hidden;
+    z-index: 50;
+    opacity: 1;
+    position: absolute;
+    /* transform: rotate(20deg); */
+  }
+  #settingsStuff {
+    font-size: 10px;
+  }
+  </style>
+</head>
+<body>
+<div class="tbg">
+  <div class="theader">
+    <a href="NEEDSWORKsettings.html"><i class="fa fa-cog" aria-hidden="true"></i></a>
+    <!-- <a href="match.html"><i class="fa fa-comments" aria-hidden="true"></i></a> -->
+    <a href="match.html">match</a>
+    <a href="index.html">swipe</a>
+    <a href="NEEDSWORKmessages.html"><i class="fa fa-comments" aria-hidden="true"></i></a>
+    <div class="tlogo">
+      <!-- <img src="https://worldvectorlogo.com/logos/tinder-1.svg" alt="Tinder Logo" title="Tinder Logo" /> -->
+      <h1>MASKD</h1>
+    </div>
+  </div>
+  <div class="tbgwrap">
+    <div class="tphoto">
+
+      <br><img id="profileImageSettings" src="./Untitled.png">
+
+      <!-- <img src="./Masks/mask2.png" id="maskImage" class="droppable"> -->
+      <img src="./Masks/mask2.png" id="ball" class="droppable">
+    </div>
+
+
+    </div>
+      <input type='file' />
+      <div id="settingsStuff">
+      <p>upload your profile picture!</p>
+      <p>choose your mask!</p>
+      <button type="button" onclick="leftFacingMask()" ontouchstart="leftFacingMask()">Left Facing</button>
+      <button type="button" onclick="rightFacingMask()" ontouchstart="rightFacingMask()">Right Facing</button>
+      <button type="button" onclick="frontFacingMask()" ontouchstart="frontFacingMask()">Front Facing</button>
+      <p>adjust the mask to be the size of your face w/ the buttons</p>
+      <button type="button" onclick="makeMaskSmaller()">Make mask smaller</button>
+      <button type="button" onclick="makeMaskBigger()">Make mask bigger</button>
+      <p>adjust the angle of the mask to match your face</p>
+      <button type="button" onclick="angleLeft()">Angle Left</button>
+      <button type="button" onclick="angleRight()">Angle Right</button>
+      <p>adjust the mask to be underneath your nose :P</p>
+      <button type="button" onclick="howDoIScreenshotMaskOnPic()">Save Changes</button>
+    </div>
+  </div>
+</body>
+<script>
+// frontFacingMask() , rightFacingMask(), leftFacingMask()
+function frontFacingMask() {
+  maskAdjustableSize.src = "./Masks/mask2.png";
+}
+function rightFacingMask() {
+  maskAdjustableSize.src = "./left-facing-mask.png";
+}
+function leftFacingMask() {
+  maskAdjustableSize.src = "./right-facing-mask.png";
+}
+// allow user to upload their profile pic
+window.addEventListener('load', function() {
+  document.querySelector('input[type="file"]').addEventListener('change', function() {
+      if (this.files && this.files[0]) {
+          var img = document.getElementById('profileImageSettings');
+          img.onload = () => {
+              URL.revokeObjectURL(img.src);  // no longer needed, free memory
+          }
+          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+          img.id = "profileImageSettings";
+      }
+  });
+});
+// make mask bigger
+var maskAdjustableSize = document.getElementById("ball");
+initialMaskWidth = maskAdjustableSize.width;
+
+function makeMaskSmaller() {
+  // console.log(maskAdjustableSize.width);
+  // currentMaskWidth = maskAdjustableSize.width;
+  // console.log(initialMaskWidth);
+  initialMaskWidth = initialMaskWidth - 10;
+  // newMaskWidth = (currentMaskWidth - 10).toString() + "px";
+  console.log(initialMaskWidth);
+  // console.log(maskAdjustableSize.width);
+  maskAdjustableSize.style.width = initialMaskWidth + "px";
+}
+function makeMaskBigger() {
+  // console.log(maskAdjustableSize.width);
+  // currentMaskWidth = maskAdjustableSize.width;
+  // console.log(initialMaskWidth);
+  initialMaskWidth = initialMaskWidth + 10;
+  // newMaskWidth = (currentMaskWidth - 10).toString() + "px";
+  console.log(initialMaskWidth);
+  // console.log(maskAdjustableSize.width);
+  maskAdjustableSize.style.width = initialMaskWidth + "px";
+}
+
+// make mask smaller
+// maskAdjustableSize.
+function howDoIScreenshotMaskOnPic() {
+  alert("how do I screenshot image of mask on face for chat section?!?");
+}
+// "angleLeft()"
+var currentAngle = 0;
+function angleLeft() {
+  currentAngle = currentAngle - 10;
+  console.log(currentAngle);
+  transformStatement = "rotate(" + currentAngle + "deg)";
+  console.log(transformStatement);
+  maskAdjustableSize.style.transform = transformStatement;
+}
+// "angleLeft()"
+function angleRight() {
+  currentAngle = currentAngle + 10;
+  console.log(currentAngle);
+  transformStatement = "rotate(" + currentAngle + "deg)";
+  console.log(transformStatement);
+  maskAdjustableSize.style.transform = transformStatement;
+}
+
+
+
+</script>
+<script src="./balldragJS.js"></script>
+</html>

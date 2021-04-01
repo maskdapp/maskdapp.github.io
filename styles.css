@@ -1,0 +1,544 @@
+html, body {
+  /* overflow: hidden;
+  height: 100%;
+  overscroll-behavior: none;
+  */
+  /*
+  max-height: 100% !important;
+  overflow-y: hidden !important;
+  */
+  overflow-y: hidden;
+}
+body {
+  position: relative;
+}
+.tbg {
+    height: 720px;
+    width: 400px;
+    background-color: #fff;
+    margin: 0 auto;
+    border: 1px solid #c0c0c0;
+}
+.tbgwrap { padding: 10px; }
+.theader { height: 65px; border-bottom: 1px solid #c0c0c0; }
+.theader i.fa-comments {
+    color: #c0c0c0;
+    font-size: 40px;
+    display: inline-block;
+    float: right;
+    padding: 10px 20px;
+    position: relative;
+}
+.theader i.fa-lungs-virus {
+    color: #c0c0c0;
+    font-size: 40px;
+    display: inline-block;
+    float: left;
+    padding: 10px 20px;
+    position: relative;
+}
+.tlogo { width: 100px; margin: 0 auto; padding: 10px; }
+.tlogo img { width: 100px; }
+/*      testing is-nope
+stolen from https://codepen.io/clementmartin17/pen/PrBMMQ
+Clement Martin
+*/
+.is-nope {
+  /* opacity:0; */
+  /* color: #D23; */
+  color: #0A9928;
+  /* border: 0.5rem double #D23; */
+  border: 0.5rem double #0A9928;
+  transform: rotate(30deg);
+  -webkit-mask-position: 2rem 3rem;
+  font-size: 2rem;
+  right:10px;
+  top:35px;
+  z-index: 50;
+  display: none;
+  position: absolute;
+}
+.is-superspread {
+  /* opacity:0; */
+  /* color: #D23; */
+  color: #00BFFF;
+  /* border: 0.5rem double #D23; */
+  border: 0.5rem double #00BFFF;
+  /* transform: rotate(30deg); */
+  -webkit-mask-position: 2rem 3rem;
+  font-size: 2rem;
+  text-align: center;
+  right:85px;
+  top:35px;
+  z-index: 50;
+  display: none;
+  position: absolute;
+}
+
+.is-approved {
+  /* opacity:0; */
+  /* color: #0A9928; */
+  color: #D23;
+  /* border: 0.5rem double #0A9928; */
+  border: 0.5rem double #D23;
+  -webkit-mask-position: 13rem 6rem;
+  transform: rotate(-30deg);
+  font-size: 2rem;
+  left:10px;
+  top:35px;
+  z-index: 50;
+  display: none;
+  position: absolute;
+}
+
+.tphoto {
+    width: 350px;
+    height: 350px;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+    top: 15px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -o-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border: 1px solid #c0c0c0;
+    padding-bottom: 60px;
+    /* background-color: #fff; */
+    box-shadow: 2px 2px 2px #c0c0c0;
+}
+/*
+#backgroundColor {
+  // background-color: red;
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  display: inline-block;
+  bottom: 0px;
+}
+*/
+.tphoto #profileImage {
+  display: inline-block;
+  width: 350px;
+  height: auto;
+  /*
+  display: inline-block;
+  */
+  background-color: #C2C2C2;
+  opacity: 1;
+  z-index: 5;
+  /* position: absolute; */
+  /* hide this w/ opacity: 0 */
+  opacity: 1;
+
+}
+/*
+#maskImage {
+  width: 95px;
+  height: auto;
+  overflow: hidden;
+  display: inline;
+  position: absolute;
+}
+*/
+.tphoto #maskImage {
+  left: 80px;
+  width: 187px;
+  top: 220px;
+  left: 80px;
+  /* css settings for front-mask.png
+  top: 220px;
+  // top: 180px;  front-mask.png setting to cover nose
+  left: 80px;
+  width: 187px;
+  */
+  /* front-mask.png settings
+  top: 151px;
+  left: 73px;
+  width: 215px;
+  */
+
+  display: inline;
+  height: auto;
+  overflow: hidden;
+  z-index: 50;
+  opacity: 1;
+  position: absolute;
+
+
+  /* settings for original cartoon mask
+display: inline;
+position: absolute;
+top: 231px;
+left: 128px;
+width: 95px;
+height: auto;
+overflow: hidden;
+display: inline;
+position: absolute;
+*m
+/* finding original settings w/ cartoon mask
+width: 55px;
+height: auto;
+440 width
+343 height
+width: 27%;
+height: auto;
+*/
+}
+
+
+/* test adding heartbeat BELOW here */
+#superSpreaderText {
+  left: 30px;
+  top: 235px;
+  position: relative;
+  display: none;
+
+  /**/
+
+  color: #c0c0c0;
+  line-height: 1;
+  margin-top: 95px;
+  font-family: arial;
+  width: 100%;
+  text-align: center;
+}
+.superSpreaderBackground {
+  top: -50px;
+  position: absolute;
+  display: inline;
+  opacity: 1;
+  display: none;
+}
+.load {
+  left: 125px;
+  margin: 150px auto;
+  width: 100px;
+  height: 100px;
+  /** height is required as absolute value **/
+  /* background-color: #F08080; */
+  background-color: #00BFFF;
+  border-radius: 100px;
+  position:absolute;
+  animation: pulse 2000ms linear infinite;
+  -webkit-animation: pulse 2000ms linear infinite;
+  -moz-animation: pulse 2000ms linear infinite;
+  display: none;
+}
+
+.load i{
+  position:absolute;
+  top:28px;
+  /* POSITIONING SYMBOL */
+  left:24%;
+  font-size: 42px;
+  color:white;
+  text-shadow:-1px -1px #333;
+}
+
+.load:after,
+.load:before {
+  display: inline-block;
+  margin: auto;
+  position: absolute;
+  content: "";
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  /* background-color: #CD5C5C; */
+  background-color: #00BFFF;
+}
+
+.load:after {
+  z-index: -100;
+  -webkit-animation: outer-ripple 2000ms linear infinite;
+  -moz-animation: outer-ripple 2000ms linear infinite;
+  animation: outer-ripple 2000ms linear infinite;
+}
+
+.load:before {
+  z-index: -200;
+  -webkit-animation: inner-ripple 2000ms linear infinite;
+  -moz-animation: inner-ripple 2000ms linear infinite;
+  animation: inner-ripple 2000ms linear infinite;
+}
+/* outer ripple */
+
+
+@keyframes pulse{
+  0% {
+    transform: scale(0.8);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+  10% {
+    transform: scale(1.1);
+    filter: alpha(opacity=1);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(0.9);
+    filter: alpha(opacity=1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+}
+
+@-moz-keyframes pulse{
+  0% {
+    transform: scale(0.8);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+  10% {
+    transform: scale(1.1);
+    filter: alpha(opacity=1);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(0.9);
+    filter: alpha(opacity=1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+}
+
+@-webkit-keyframes pulse{
+  0% {
+    transform: scale(0.8);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+  10% {
+    transform: scale(1.1);
+    filter: alpha(opacity=1);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(0.9);
+    filter: alpha(opacity=1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+}
+
+
+@keyframes outer-ripple {
+  0% {
+    transform: scale(1);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+  80% {
+    transform: scale(3.5);
+    filter: alpha(opacity=0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(3.5);
+    filter: alpha(opacity=0);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes outer-ripple {
+  0% {
+    transform: scale(1);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+  80% {
+    transform: scale(3.5);
+    filter: alpha(opacity=0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(3.5);
+    filter: alpha(opacity=0);
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes outer-ripple {
+  0% {
+    transform: scale(1);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+  80% {
+    transform: scale(3.5);
+    filter: alpha(opacity=0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(3.5);
+    filter: alpha(opacity=0);
+    opacity: 0;
+  }
+}
+/* inner ripple */
+
+@keyframes inner-ripple {
+  0% {
+    transform: scale(1);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+  30% {
+    transform: scale(1);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.5);
+    filter: alpha(opacity=0);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes inner-ripple {
+  0% {
+    transform: scale(1);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+  30% {
+    transform: scale(1);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.5);
+    filter: alpha(opacity=0);
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes inner-ripple {
+  0% {
+    transform: scale(1);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+  30% {
+    transform: scale(1);
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.5);
+    filter: alpha(opacity=0);
+    opacity: 0;
+  }
+}
+
+
+
+/* test adding heartbeat ABOVE here */
+.tname {
+    padding: 15px;
+    font-size: 20px;
+    font-family: 'Helvetica', sans-serif;
+    float: left;
+    /*
+    position: absolute;
+    bottom: 0px;
+    z-index: 50;
+    */
+}
+.tname .age { font-weight: 200; }
+.tinfo { font-family: 'Helvetica', sans-serif; }
+.tinfo .fa-people-arrows, .tinfo .fa-plane {
+    color: #c0c0c0;
+    float: right;
+    font-size: 24px;
+    padding: 12px;
+    */
+    position: absolute;
+    bottom: 0px;
+    z-index: 50;
+    */
+
+}
+/*
+.far-people-arrows {
+  padding-right: 15px;
+  padding-left: 15px;
+  right: 5px;
+}
+.fa-plane  {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+*/
+.tcontrols {}
+.tno {
+    background-color: #fff;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    top: 50px;
+    left: 25px;
+    border: 10px solid #f0f0f0;
+}
+.tno i {
+    color: #ff695b;
+    font-size: 60px;
+    padding: 30px 30px;
+}
+.ti {
+    background-color: #fff;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    left: 12px;
+    top: 30px;
+    border: 10px solid #f0f0f0;
+}
+.ti .fa-users {
+    font-size: 20px;
+    padding: 15px 13px;
+    color: #398beb;
+}
+.tyes {
+    background-color: #fff;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    top: 41px;
+    left: 0px;
+    border: 10px solid #f0f0f0;
+}
+.tyes i {
+    color: #5de19c;
+    font-size: 50px;
+    padding: 30px 30px;
+}
